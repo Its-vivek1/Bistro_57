@@ -219,29 +219,29 @@ export const MENU_ITEMS = [
   // --- Mojitos & Fruit Coolers ---
   {
     id: 'mc-1',
-    name: 'Watermelon Mint Mojito',
+    name: 'Bistro 57 Signature Mint Mojito',
+    category: 'mojitos-coolers',
+    superCategory: 'shakes',
+    price: 149,
+    rating: 5.0,
+    badge: 'Signature Beaker',
+    badgeType: 'bestseller',
+    description: 'Fresh garden mint, crushed lime, sparkling soda & chilled ice served in our authentic Bistro 57 beaker glass.',
+    image: '/assets/images/b57-real-mint-mojito.jpg',
+    tags: ['Mint', 'Fresh', 'Signature']
+  },
+  {
+    id: 'mc-2',
+    name: 'Blue Ocean Curacao Cooler',
     category: 'mojitos-coolers',
     superCategory: 'shakes',
     price: 149,
     rating: 4.9,
-    badge: 'Hydrating Sip',
-    badgeType: 'bestseller',
-    description: 'Muddled fresh watermelon chunks, garden mint sprigs, tangy lime juice, sugar cane syrup & sparkling soda over crushed ice.',
-    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
-    tags: ['Mint', 'Fresh', 'Sparkling']
-  },
-  {
-    id: 'mc-2',
-    name: 'Crisp Green Apple Fizz',
-    category: 'mojitos-coolers',
-    superCategory: 'shakes',
-    price: 149,
-    rating: 4.8,
-    badge: 'Tangy Sparkle',
+    badge: 'Top Trending',
     badgeType: 'musttry',
-    description: 'Granny Smith green apple extract, crushed mint, lime slices, and effervescent fizz served chilled with a salted rim.',
-    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
-    tags: ['Apple', 'Tangy', 'Chilled']
+    description: 'Vibrant Blue Curacao citrus blend with ice fizz, lemon wedge & refreshing sparkling chill.',
+    image: '/assets/images/b57-real-blue-lagoon.jpg',
+    tags: ['BlueLagoon', 'Citrus', 'Chilled']
   },
 
   // --- Artisanal Pizzas ---

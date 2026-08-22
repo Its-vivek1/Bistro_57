@@ -12,21 +12,21 @@ export const About = ({ onOpenReservation }) => {
           <div className="lg:col-span-6 relative reveal-init reveal-fade-left">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
-              {/* Main Image */}
+              {/* Main Image - Real Bistro 57 Patel Nagar Dining Section */}
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] bg-neutral-200">
                 <img
-                  src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
-                  alt="Bistro 57 Warm Ambiance"
+                  src="/assets/images/b57-real-interior-art-dining.png"
+                  alt="Bistro 57 Patel Nagar Dining & Art Wall"
                   className="w-full h-full object-cover hover:scale-105 transition duration-700"
                 />
               </div>
 
-              {/* Overlapping Secondary Image */}
-              <div className="hidden sm:block absolute -bottom-8 -right-6 w-52 h-44 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              {/* Overlapping Secondary Image - Real Bistro 57 Branded Drink */}
+              <div className="hidden sm:block absolute -bottom-8 -right-6 w-48 h-48 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white">
                 <img
-                  src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80"
-                  alt="Fresh Artisan Pizza"
-                  className="w-full h-full object-cover"
+                  src="/assets/images/b57-real-mint-mojito.jpg"
+                  alt="Bistro 57 Branded Mint Cooler"
+                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
                 />
               </div>
 

@@ -93,33 +93,67 @@ export const Location = () => {
             </div>
           </div>
 
-          {/* Right: Embedded Google Map */}
-          <div className="lg:col-span-7 rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-neutral-200 min-h-[380px] relative reveal-init reveal-fade-right delay-200">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14318.570776774653!2d78.182740!3d26.204500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c6a469a9108b%3A0x7d6f5170d10b77b8!2sPatel%20Nagar%2C%20City%20Center%2C%20Gwalior%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0, minHeight: '420px' }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Bistro 57 Patel Nagar Gwalior Map"
-            ></iframe>
-            <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg border border-neutral-200 flex items-center gap-3 pointer-events-none">
-              <img
-                src="/assets/images/bistro57-logo.png"
-                alt="B57"
-                className="w-8 h-8 rounded-full"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=100&q=80';
-                }}
-              />
-              <div>
-                <div className="font-bold text-xs text-neutral-900">Bistro 57 Gwalior</div>
-                <div className="text-[10px] text-neutral-500">Patel Nagar, City Center</div>
+          {/* Right: Embedded Google Map & Real Ambiance Preview */}
+          <div className="lg:col-span-7 flex flex-col gap-6 reveal-init reveal-fade-right delay-200">
+            
+            {/* Real Cafe Photo Badges Preview */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="relative h-40 rounded-2xl overflow-hidden border-2 border-white/80 shadow-md group">
+                <img
+                  src="/assets/images/b57-real-lounge-sofas.png"
+                  alt="Plush Velvet Sofas at Bistro 57 Gwalior"
+                  className="w-full h-full object-cover group-hover:scale-108 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                  <span className="text-[11px] font-bold text-white flex items-center gap-1.5">
+                    <span>🛋️</span> Plush Velvet Lounge Area
+                  </span>
+                </div>
+              </div>
+
+              <div className="relative h-40 rounded-2xl overflow-hidden border-2 border-white/80 shadow-md group">
+                <img
+                  src="/assets/images/b57-real-interior-chandelier.png"
+                  alt="Modern Ambiance at Bistro 57 Gwalior"
+                  className="w-full h-full object-cover group-hover:scale-108 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+                  <span className="text-[11px] font-bold text-white flex items-center gap-1.5">
+                    <span>✨</span> Celebration & Party Seating
+                  </span>
+                </div>
               </div>
             </div>
+
+            {/* Embedded Google Map */}
+            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-neutral-200 min-h-[300px] relative flex-1">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14318.570776774653!2d78.182740!3d26.204500!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3976c6a469a9108b%3A0x7d6f5170d10b77b8!2sPatel%20Nagar%2C%20City%20Center%2C%20Gwalior%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '320px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Bistro 57 Patel Nagar Gwalior Map"
+              ></iframe>
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-neutral-200 flex items-center gap-3 pointer-events-none">
+                <img
+                  src="/assets/images/bistro57-logo.png"
+                  alt="B57"
+                  className="w-8 h-8 rounded-full"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=100&q=80';
+                  }}
+                />
+                <div>
+                  <div className="font-bold text-xs text-neutral-900">Bistro 57 Gwalior</div>
+                  <div className="text-[10px] text-neutral-500">Patel Nagar, City Center</div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
