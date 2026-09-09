@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { MessageSquare, Phone, ShoppingBag, ArrowUp } from 'lucide-react';
+import { MessageSquare, Phone, ShoppingBag, ArrowUp, Gift } from 'lucide-react';
 
-export const FloatingActions = () => {
+export const FloatingActions = ({ onOpenSpinWheel }) => {
   const { cartCount, openCart, badgeAnimate } = useCart();
   const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -22,6 +22,19 @@ export const FloatingActions = () => {
   return (
     <div className="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
       
+      {/* Floating Spin & Win Gift Button */}
+      <button
+        onClick={onOpenSpinWheel}
+        className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-400 text-neutral-950 shadow-2xl flex items-center justify-center transition transform hover:scale-110 group relative animate-bounce"
+        aria-label="Spin & Win Discount"
+        title="Spin & Win Instant Discount!"
+      >
+        <Gift className="w-6 h-6 text-neutral-950" />
+        <span className="absolute left-14 px-3 py-1.5 rounded-xl bg-black/90 text-amber-300 text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg border border-amber-500/30">
+          🎁 Spin & Win Coupons!
+        </span>
+      </button>
+
       {/* Floating WhatsApp Action */}
       <a
         href="https://wa.me/917838828743?text=Hello%20Bistro%2057%20Gwalior!%20I%20want%20to%20place%20an%20order."

@@ -14,7 +14,86 @@
     background-color: #F5EBD7;
     color: #1E120D;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+}
+
+/* ==========================================================================
+   Light Theme Comprehensive Overrides
+   ========================================================================== */
+html.light-theme {
+  color-scheme: light;
+}
+
+html.light-theme body {
+  background-color: #FAF4EB !important;
+  color: #2C1D16 !important;
+}
+
+/* Light Theme Background Overrides for dark containers & gradients */
+html.light-theme .from-\[\#1A1411\],
+html.light-theme .via-\[\#241B16\] {
+  --tw-gradient-from: #FFF5E6 !important;
+  --tw-gradient-to: #FAF4EB !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #F7EAE0, var(--tw-gradient-to) !important;
+}
+
+html.light-theme .bg-\[\#181310\],
+html.light-theme .bg-\[\#14100c\],
+html.light-theme .bg-\[\#19130f\],
+html.light-theme .bg-\[\#16110d\],
+html.light-theme .bg-\[\#1e1713\],
+html.light-theme .bg-\[\#120e0b\],
+html.light-theme .bg-\[\#221a14\],
+html.light-theme .bg-\[\#1a140f\],
+html.light-theme .bg-neutral-900,
+html.light-theme .bg-neutral-950,
+html.light-theme .bg-neutral-900\/90,
+html.light-theme .bg-neutral-900\/80,
+html.light-theme .bg-neutral-900\/60 {
+  background-color: #FFF8EE !important;
+  color: #2C1D16 !important;
+  border-color: rgba(217, 119, 6, 0.25) !important;
+}
+
+html.light-theme .bg-b57-creamSurface {
+  background-color: #F5EBD7 !important;
+}
+
+/* Light Theme Text Color Adjustments */
+html.light-theme .text-white,
+html.light-theme h1.text-white,
+html.light-theme h2.text-white,
+html.light-theme h3.text-white,
+html.light-theme h4.text-white {
+  color: #231610 !important;
+}
+
+html.light-theme .text-b57-cream {
+  color: #2C1D16 !important;
+}
+
+html.light-theme .text-neutral-400,
+html.light-theme .text-neutral-300,
+html.light-theme .text-b57-cream\/85 {
+  color: #594337 !important;
+}
+
+/* Light Theme Navbar Styling */
+html.light-theme .navbar-main-theme,
+html.light-theme .navbar-scrolled-theme {
+  background: #FFF5E6 !important;
+  border-bottom: 1.5px solid rgba(217, 119, 6, 0.35) !important;
+  box-shadow: 0 10px 30px rgba(180, 100, 20, 0.12) !important;
+}
+
+html.light-theme .nav-link-item {
+  color: #2C1D16 !important;
+}
+
+html.light-theme .nav-link-item:hover {
+  color: #D97706 !important;
+  background: rgba(217, 119, 6, 0.12) !important;
 }
 
 /* Custom Scrollbars */

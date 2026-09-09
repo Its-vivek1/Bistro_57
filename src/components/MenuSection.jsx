@@ -176,11 +176,21 @@ export const MenuSection = ({ onSelectItem }) => {
                         e.target.src = 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=600&q=80';
                       }}
                     />
-                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                      <span className="veg-symbol shadow-sm"></span>
+                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 flex-wrap max-w-[80%]">
+                      <span className="veg-symbol shadow-sm" title="100% Pure Vegetarian"></span>
                       {item.badge && (
                         <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-white shadow-sm">
                           {item.badge}
+                        </span>
+                      )}
+                      {(item.tags.some(t => t.toLowerCase().includes('spicy') || t.toLowerCase().includes('chilli') || t.toLowerCase().includes('peri')) || item.category === 'pizzas' || item.category === 'pastas') && (
+                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-red-500/90 text-white shadow-sm flex items-center gap-0.5" title="Spicy Delight">
+                          🌶️ Spicy
+                        </span>
+                      )}
+                      {(item.category === 'cold-coffee' || item.category === 'hot-coffee' || item.category === 'sandwiches-garlic-bread' || item.category === 'momos') && (
+                        <span className="px-1.5 py-0.5 rounded-full text-[9px] font-extrabold bg-emerald-700 text-white shadow-sm flex items-center gap-0.5" title="Jain Friendly Option">
+                          🌿 Jain
                         </span>
                       )}
                     </div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext';
-import { ShoppingBag, ChevronDown, Menu, X, Calendar } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { ShoppingBag, ChevronDown, Menu, X, Calendar, Sun, Moon } from 'lucide-react';
 import { SUPER_CATEGORIES } from '../data/menuData';
 
 export const Navbar = ({ onOpenReservation }) => {
   const { cartCount, openCart, badgeAnimate } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -126,6 +128,16 @@ export const Navbar = ({ onOpenReservation }) => {
           {/* Desktop Right Action Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="p-2.5 rounded-full bg-white/10 border border-white/15 text-amber-300 hover:text-white hover:bg-white/20 transition transform hover:scale-105"
+              title={`Switch to ${theme === 'dark' ? 'Light Warm Latte' : 'Dark Café Noir'} Theme`}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-amber-300" />}
+            </button>
+
             {/* Cart Trigger */}
             <button
               onClick={openCart}
@@ -167,6 +179,15 @@ export const Navbar = ({ onOpenReservation }) => {
           {/* Mobile Right Controls */}
           <div className="flex items-center gap-2 lg:hidden">
             
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-white/10 text-amber-300"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-amber-300" />}
+            </button>
+
             {/* Mobile Cart Trigger */}
             <button
               onClick={openCart}

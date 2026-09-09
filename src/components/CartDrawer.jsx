@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, Trash2, Plus, Minus, ShoppingBag, Send, ArrowRight } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, Send, ArrowRight, Tag, Check, Sparkles } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
 
-export const CartDrawer = () => {
+export const CartDrawer = ({ onOpenCheckout }) => {
   const {
     isCartOpen,
     closeCart,
@@ -12,12 +12,17 @@ export const CartDrawer = () => {
     removeFromCart,
     clearCart,
     cartSubtotal,
+    discountAmount,
+    appliedCoupon,
+    applyCoupon,
+    removeCoupon,
     gstAmount,
     grandTotal,
     generateWhatsAppMessage
   } = useCart();
 
   const { addToast } = useToast();
+  const [couponInput, setCouponInput] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [orderType, setOrderType] = useState('Dine-In');
@@ -25,7 +30,29 @@ export const CartDrawer = () => {
 
   if (!isCartOpen) return null;
 
-  const handleCheckout = (e) => {
+  const handleApplyCoupon = (e) => {
+    e.preventDefault();
+    const result = applyCoupon(couponInput);
+    if (result.success) {
+      addToast(result.message, 'success');
+      setCouponInput('');
+    } else {
+      addToast(result.message, 'error');
+    }
+  };
+
+  const handleProceedCheckout = () => {
+    if (cartItems.length === 0) {
+      addToast('Your cart is empty!', 'error');
+      return;
+    }
+    closeCart();
+    if (onOpenCheckout) {
+      onOpenCheckout();
+    }
+  };
+
+  const handleWhatsAppCheckout = (e) => {
     e.preventDefault();
     if (cartItems.length === 0) {
       addToast('Your cart is empty. Please add delicious items first!', 'error');
@@ -167,33 +194,55 @@ export const CartDrawer = () => {
                   ))}
                 </div>
 
-                {/* Customer Details Form */}
+                {/* Promo Code & Coupon Section */}
+                <div className="pt-4 border-t border-white/10 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
+                      <Tag className="w-3.5 h-3.5 text-amber-400" /> Apply Coupon Code
+                    </span>
+                  </div>
+
+                  {appliedCoupon ? (
+                    <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <Check className="w-4 h-4 text-emerald-400" />
+                        <div>
+                          <strong className="text-emerald-300 block">{appliedCoupon.code}</strong>
+                          <span className="text-[10px] text-neutral-300">{appliedCoupon.label}</span>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={removeCoupon}
+                        className="text-neutral-400 hover:text-red-400 text-xs underline font-medium"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleApplyCoupon} className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Try 'BISTRO15' or 'COFFEE50'"
+                        value={couponInput}
+                        onChange={(e) => setCouponInput(e.target.value)}
+                        className="flex-1 px-3 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-xs text-white uppercase outline-none focus:border-amber-500"
+                      />
+                      <button
+                        type="submit"
+                        className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-extrabold text-xs transition"
+                      >
+                        Apply
+                      </button>
+                    </form>
+                  )}
+                </div>
+
+                {/* Quick WhatsApp Details Form (Optional alternative) */}
                 <div className="pt-4 space-y-3 border-t border-white/10">
                   <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider block">
-                    Dining / Order Details
+                    Quick WhatsApp Order Options
                   </span>
-
-                  <div>
-                    <label className="block text-[11px] font-bold text-neutral-300 mb-1">
-                      Order Type
-                    </label>
-                    <div className="grid grid-cols-3 gap-2">
-                      {['Dine-In', 'Takeaway', 'Delivery'].map((type) => (
-                        <button
-                          key={type}
-                          type="button"
-                          onClick={() => setOrderType(type)}
-                          className={`py-1.5 rounded-xl text-xs font-bold border transition ${
-                            orderType === type
-                              ? 'bg-b57-orange text-white border-b57-orange'
-                              : 'bg-neutral-900 text-neutral-400 border-neutral-700'
-                          }`}
-                        >
-                          {type}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <input
@@ -211,14 +260,6 @@ export const CartDrawer = () => {
                       className="px-3 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-xs text-white outline-none focus:border-b57-orange"
                     />
                   </div>
-
-                  <input
-                    type="text"
-                    placeholder="Cooking / Special Requests..."
-                    value={cookingNotes}
-                    onChange={(e) => setCookingNotes(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-neutral-900 border border-neutral-700 text-xs text-white outline-none focus:border-b57-orange"
-                  />
                 </div>
               </>
             )}
@@ -232,22 +273,41 @@ export const CartDrawer = () => {
                   <span>Subtotal</span>
                   <span>₹{cartSubtotal}</span>
                 </div>
+
+                {discountAmount > 0 && (
+                  <div className="flex justify-between text-emerald-400">
+                    <span>Discount ({appliedCoupon?.code})</span>
+                    <span>-₹{discountAmount}</span>
+                  </div>
+                )}
+
                 <div className="flex justify-between">
                   <span>GST (5% Pure Veg Dining)</span>
                   <span>₹{gstAmount}</span>
                 </div>
+
                 <div className="flex justify-between text-base font-extrabold text-white pt-2 border-t border-white/10">
                   <span>Grand Total</span>
                   <span className="text-amber-300 font-heading">₹{grandTotal}</span>
                 </div>
               </div>
 
+              {/* Main Instant Checkout Button */}
               <button
-                onClick={handleCheckout}
-                className="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-b57-orange to-b57-red text-white flex items-center justify-center gap-2 shadow-lg hover:shadow-b57-glow transition"
+                onClick={handleProceedCheckout}
+                className="w-full py-3.5 rounded-xl font-bold text-sm bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-neutral-950 flex items-center justify-center gap-2 shadow-lg hover:shadow-amber-500/20 transition"
               >
-                <span>Checkout via WhatsApp</span>
-                <Send className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
+                <span>Proceed to Online Checkout & UPI</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={handleWhatsAppCheckout}
+                className="w-full py-2.5 rounded-xl font-bold text-xs bg-neutral-900 hover:bg-neutral-800 text-neutral-300 border border-neutral-700 flex items-center justify-center gap-2 transition"
+              >
+                <Send className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Or Order Direct via WhatsApp</span>
               </button>
             </div>
           )}
